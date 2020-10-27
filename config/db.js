@@ -6,11 +6,12 @@ const connectDB = () => {
     mongoose.connect(db, {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+        useUnifiedTopology: true
     })
     .then(() => console.log('MongoDB is connected'))
-    .catch(error => {
-        console.error(error.message)
+    .catch(err => {
+        console.error(err.message)
         process.exit(1)
     })
 }
