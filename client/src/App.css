@@ -36,6 +36,10 @@ ul {
   list-style: none;
 }
 
+.env-phone-icons {
+  padding-right: 5px;
+}
+
 img {
   width: 100%;
 }
