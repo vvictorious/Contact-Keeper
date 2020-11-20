@@ -13,7 +13,7 @@ import {
 } from '../types'
 
 const ContactState = props => {
-    
+
     const initialState = {
         contacts: [
             {
@@ -35,7 +35,7 @@ const ContactState = props => {
                 name: 'Big Kahuna',
                 email: 'kahuna@gmail.com',
                 phone: '7202022020',
-                type: 'personal'
+                type: 'professional'
             },                 
         ]
     }
