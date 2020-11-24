@@ -1,16 +1,23 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import ContactContext from '../../context/contact/contactContext'
 
-export const ContactFilter = () => {
+const ContactFilter = () => {
 
     const contactContext = useContext(ContactContext)
+    const { filterContacts, clearFilter, filtered } = contactContext
     const text = useRef('')
+
+    useEffect( () => {
+        if (filtered === null) {
+            text.current.value = ''
+        }
+    })
 
     const onChange = e => {
         if (text.current.value !== '') {
-            contactContext.filterContacts(e.target.value)
+        filterContacts(e.target.value)
         } else {
-            contactContext.clearFilter()
+        clearFilter()
         }
     }
 
@@ -20,3 +27,5 @@ export const ContactFilter = () => {
         </form>
     )
 }
+
+export default ContactFilter
