@@ -54,7 +54,8 @@ const AuthState = props => {
             isAuthenticated: state.isAuthenticated,
             loading: state.loading,
             user: state.user,
-            error: state.error
+            error: state.error,
+            register
         }}>
             {props.children}
         </AuthContext.Provider>
