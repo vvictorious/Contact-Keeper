@@ -25,6 +25,21 @@ const AuthState = props => {
 
     const [state, dispatch] = useReducer(authReducer, initialState)
 
+    //load user 
+    const loadUser = async () => {
+        try {
+            const res = await axios.get('/api/auth')
+            dispatch({
+                type: USER_LOADED,
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: AUTH_ERROR
+            })
+        }
+    }
+
     //register a user
     const register = async formData => {
         const config = {
