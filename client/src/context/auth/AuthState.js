@@ -15,9 +15,6 @@ import {
 } from '../types'
 
 const AuthState = props => {
-    if (localStorage.token) {
-        setAuthToken(localStorage.token)
-    }
     const initialState = {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
@@ -30,7 +27,9 @@ const AuthState = props => {
 
     //load user 
     const loadUser = async () => {
-
+        if (localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
         try {
             const res = await axios.get('/api/auth')
             dispatch({
@@ -57,6 +56,7 @@ const AuthState = props => {
                 type: REGISTER_SUCCESS,
                 payload: res.data
             })
+            loadUser()
         } catch (err) {
             dispatch({
                 type: REGISTER_FAIL,
