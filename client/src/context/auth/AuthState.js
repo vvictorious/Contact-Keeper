@@ -2,6 +2,7 @@ import React, { useReducer } from 'react'
 import axios from 'axios'
 import AuthContext from './authContext'
 import authReducer from './authReducer'
+import setAuthToken from '../../utils/setAuthToken'
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
@@ -14,7 +15,9 @@ import {
 } from '../types'
 
 const AuthState = props => {
-
+    if (localStorage.token) {
+        setAuthToken(localStorage.token)
+    }
     const initialState = {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
@@ -27,6 +30,7 @@ const AuthState = props => {
 
     //load user 
     const loadUser = async () => {
+
         try {
             const res = await axios.get('/api/auth')
             dispatch({
