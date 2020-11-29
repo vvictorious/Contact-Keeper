@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
-import { v4 as uuidv4 } from 'uuid';
 import ContactContext from './contactContext'
 import ContactReducer from './contactReducer'
+import axios from 'axios'
 import {
     ADD_CONTACT,
     DELETE_CONTACT,
@@ -9,35 +9,14 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     FILTER_CONTACTS,
-    CLEAR_FILTER
+    CLEAR_FILTER,
+    CONTACT_ERROR
 } from '../types'
 
 const ContactState = props => {
 
     const initialState = {
-        contacts: [
-            {
-                id: 1,
-                name: 'John Appleseed',
-                email: 'john@gmail.com',
-                phone: '7202022020',
-                type: 'personal'
-            },
-            {
-                id: 2,
-                name: 'Will Smith',
-                email: 'will@gmail.com',
-                phone: '3030303030',
-                type: 'personal'
-            },       
-            {
-                id: 3,
-                name: 'Big Kahuna',
-                email: 'kahuna@gmail.com',
-                phone: '7202022020',
-                type: 'professional'
-            },                 
-        ],
+        contacts: [],
         current: null,
         filtered: null
     }
@@ -45,12 +24,24 @@ const ContactState = props => {
     const [state, dispatch] = useReducer(ContactReducer, initialState)
 
     //add contact
-    const addContact = contact => {
-        contact.id = uuidv4();
-        dispatch({
-            type: ADD_CONTACT,
-            payload: contact
-        })
+    const addContact = async contact => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        try {
+            const res = await axios.post('/api/contacts', contact, config)
+            dispatch({
+                type: ADD_CONTACT,
+                payload: res
+            })         
+        } catch (err) {
+            dispatch({
+                type: CONTACT_ERROR,
+                payload: err.response.msg
+            })
+        }
     }
 
     //delete contact
