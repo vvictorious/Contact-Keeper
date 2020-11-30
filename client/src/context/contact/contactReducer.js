@@ -1,4 +1,5 @@
 import {
+    GET_CONTACTS,    
     ADD_CONTACT,
     DELETE_CONTACT,
     SET_CURRENT,
@@ -7,7 +8,6 @@ import {
     FILTER_CONTACTS,
     CLEAR_FILTER,
     CONTACT_ERROR,
-    GET_CONTACTS,
     CLEAR_CONTACTS    
 } from '../types'
 

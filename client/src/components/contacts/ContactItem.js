@@ -5,7 +5,7 @@ import ContactContext from '../../context/contact/contactContext'
 const ContactItem = ({ contact }) => {
 
     const contactContext = useContext(ContactContext)
-    const { deleteContact, setCurrent, clearCurrent } = contactContext
+    const { contacts, deleteContact, setCurrent, clearCurrent } = contactContext
 
     const onDelete = () => {
         deleteContact(contact.id)
@@ -20,14 +20,14 @@ const ContactItem = ({ contact }) => {
                 <span 
                     style={{ float: 'right'}} 
                     className={'badge ' + (contact.type === 'professional' ? 'badge-success' : 'badge-primary')}>
-                        {contact.data.type.charAt(0).toUpperCase() + contact.data.type.slice(1)}
+                        {contact.type.charAt(0).toUpperCase() + contact.type.slice(1)}
                 </span>
             </h3>
             <ul className='list'>
-                {contact.data.email && (<li>
-                    <i className='fas fa-envelope-open env-phone-icons'></i>{contact.data.email}
+                {contact.email && (<li>
+                    <i className='fas fa-envelope-open env-phone-icons'></i>{contact.email}
                 </li>)}
-                {contact.data.phone && (<li>
+                {contact.phone && (<li>
                     <i className='fas fa-phone env-phone-icons'></i>{contact.phone}
                 </li>)}                
             </ul>
