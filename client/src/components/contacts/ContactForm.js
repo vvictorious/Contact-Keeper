@@ -44,7 +44,7 @@ const ContactForm = () => {
             phone: '',
             type: 'personal'            
         })
-    }
+    } 
 
     const clearAll = () => {
         clearCurrent()
