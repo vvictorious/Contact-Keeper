@@ -31,7 +31,6 @@ const ContactState = props => {
     const getContacts = async () => {
         try {
             const res = await axios.get("/api/contacts")
-            console.log(res.data)
             dispatch({
                 type: GET_CONTACTS,
                 payload: res.data
@@ -61,7 +60,7 @@ const ContactState = props => {
             console.log(err)
             dispatch({
                 type: CONTACT_ERROR,
-                payload: err.response.msg
+                payload: err.response
             })
         }
     }
@@ -73,6 +72,13 @@ const ContactState = props => {
             payload: id
         })
     }
+
+    // clear contacts
+    const clearContacts = () => {
+        dispatch({
+            type: CLEAR_CONTACTS
+        })
+    }    
 
     //set current contact
     const setCurrent = contact => {
@@ -124,7 +130,8 @@ const ContactState = props => {
             updateContact,
             filterContacts,
             clearFilter,
-            getContacts
+            getContacts,
+            clearContacts
         }}>
             {props.children}
         </ContactContext.Provider>
